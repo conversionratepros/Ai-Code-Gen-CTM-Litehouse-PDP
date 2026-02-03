@@ -61,7 +61,7 @@
     font-size: 14px;
     text-align: left;
     list-style: none;
-    z-index: 100;
+    z-index: 1;
     /* closed: hidden and scaled down "from the inside" */
     opacity: 0;
     visibility: hidden;
@@ -86,7 +86,7 @@
     color: #000;
     /* padding: 0 16px 10px; */
     margin: 0 0 4px 0;
-    border-bottom: 1px solid #eee;
+    /* border-bottom: 1px solid #eee; */
     font-weight: 600;
     font-size: 18px;
     margin-bottom: 20px;
@@ -159,13 +159,13 @@
 }
 
 .cro-ki7-ki1-reviews-write-btn {
-    padding: 8px 16px;
+    padding: 7px 13px;
     background: #fff;
     border: 1px solid #d0d0d0;
     border-radius: 2px;
     color: #333;
     font-family: Poppins, sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
     cursor: pointer;
 }
@@ -241,8 +241,10 @@
 
 .cro-ki7-ki1-review-badges {
     display: flex;
-    gap: 10px;
-    align-items: flex-start;
+    gap: 4px;
+    align-items: center;
+    top: 2px;
+    position: relative;
 }
 
 .cro-ki7-ki1-review-verified {
@@ -263,6 +265,7 @@
     gap: 2px;
     margin: 0;
     align-items: center;
+    margin-top: 4px;
 }
 
 .cro-ki7-ki1-star {
@@ -270,6 +273,8 @@
     color: #ddd;
     display: inline-block;
     line-height: 1;
+    width: 14px;
+    height: 14px;
 }
 
 .cro-ki7-ki1-star.cro-ki7-ki1-star-filled {
@@ -315,17 +320,11 @@
     font-style: normal;
     font-weight: 600;
     line-height: 19px;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: auto;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
     margin-top: 5px;
 }
 
 .cro-ki7-ki1-review-text a.cro-ki7-ki1-review-see-more:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .cro-ki7-ki1-review-item-type {
@@ -333,7 +332,7 @@
     gap: 2px;
     font-size: 14px;
     color: #666;
-    margin-top: 13.5px;
+    margin-top: 13.7px;
     align-items: baseline;
     flex-direction: column;
 }
@@ -413,16 +412,10 @@
     font-style: normal;
     font-weight: 600;
     line-height: 19px;
-    text-decoration-line: underline;
-    text-decoration-style: solid;
-    text-decoration-skip-ink: auto;
-    text-decoration-thickness: auto;
-    text-underline-offset: auto;
-    text-underline-position: from-font;
 }
 
 .cro-ki7-ki1-review-reply-text a.cro-ki7-ki1-review-see-more:hover {
-    text-decoration: underline;
+    text-decoration: none;
     /* color: #73777B; */
     /* font-family: Poppins; */
     /* font-size: 12px; */
@@ -577,6 +570,10 @@
     font-weight: 400;
     src: url(https://fonts.loox.io/fonts/s/poppins/v24/pxiEyp8kv8JHgFVrJJbecnFHGPezSQ.woff2) format('woff2');
     unicode-range: U +0900 -097F, U +1CD0 -1CF9, U +200C -200D, U +20A8, U +20B9, U +20F0, U +25CC, U + A830-A839, U + A8E0-A8FF, U +11B00 -11B09;
+    width: 232px;
+    border-radius: 2px;
+    border: 1px solid #E8E8E8;
+    background: #fff;
 }
 
 .cro-ki7-ki1-show-more-reviews:hover {
@@ -600,7 +597,7 @@
 
 /* Review Summary Section Styles */
 .cro-ki7-ki1-reviews-summary {
-    margin-bottom: 40px;
+    margin-bottom: 16px;
     padding-bottom: 30px;
     /* border-bottom: 1px solid #e0e0e0; */
     border-bottom: 1px solid #122B3B;
@@ -1157,6 +1154,28 @@ p.cro-ki7-ki1-review-reply-expanded .cro-ki7-ki1-review-see-more {
 
 .shopify-block.shopify-app-block #looxReviews{
     display: none;
+}
+
+.cro-ki7-ki1-review-card:nth-child(odd) {
+    
+}
+
+.cro-ki7-ki1-review-card:nth-child(even) {
+    border: 1px solid #E2E2E2;
+    background: #F8F8F8;
+    margin: 20px 0;
+}
+
+span.cro-ki7-ki1-review-verifiedImg {
+    height: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cro-ki7-ki1-star svg {
+    width: 14px;
+    height: 14px;
 }
 
 /* Responsive Design for Modal */

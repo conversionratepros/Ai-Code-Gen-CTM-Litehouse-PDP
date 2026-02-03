@@ -3796,11 +3796,11 @@
                 var isReplyTruncated = false;
                 
                 if (fullReplyText.length > 150) {
-                    // Truncate to 150 characters and add ellipsis
-                    displayReplyText = fullReplyText.substring(0, 150);
-                    replyEllipsis = '...';
+                    // Truncate to 150 characters, trim trailing space, ellipsis in link
+                    displayReplyText = fullReplyText.substring(0, 150).trimEnd();
+                    replyEllipsis = '';
                     isReplyTruncated = true;
-                    replySeeMoreButtonHtml = '<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
+                    replySeeMoreButtonHtml = '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>';
                 }
                 
                 // Escape HTML and replace newlines for display
@@ -3811,7 +3811,7 @@
                 // Store full reply text in data attribute if truncated
                 var fullReplyTextDataAttr = isReplyTruncated ? ' data-full-text="' + escapedFullReplyText + '"' : '';
                 
-                replyHtml = '<div class="cro-ki7-ki1-review-reply"><div class="cro-ki7-ki1-review-reply-header"><span class="cro-ki7-ki1-review-reply-author">Litehouse LLC</span></div><div class="cro-ki7-ki1-review-reply-text"><p' + fullReplyTextDataAttr + '>' + escapedDisplayReplyText + replyEllipsis + replySeeMoreButtonHtml + '</p></div></div>';
+                replyHtml = '<div class="cro-ki7-ki1-review-reply"><div class="cro-ki7-ki1-review-reply-header"><span class="cro-ki7-ki1-review-reply-author">Litehouse LLC replied:</span></div><div class="cro-ki7-ki1-review-reply-text"><p' + fullReplyTextDataAttr + '>' + escapedDisplayReplyText + replySeeMoreButtonHtml + '</p></div></div>';
             }
             
             // Limit text to 250 characters and add "See more" button if needed
@@ -3822,11 +3822,11 @@
             var isTruncated = false;
             
             if (fullText.length > 250) {
-                // Truncate to 250 characters and add ellipsis
-                displayText = fullText.substring(0, 250);
-                ellipsis = '...';
+                // Truncate to 250 characters, trim trailing space, ellipsis in link
+                displayText = fullText.substring(0, 250).trimEnd();
+                ellipsis = '';
                 isTruncated = true;
-                seeMoreButtonHtml = '<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
+                seeMoreButtonHtml = '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>';
             }
             
             // Escape HTML and replace newlines for display
@@ -3851,7 +3851,7 @@
                     '</div>' +
                     '<div class="cro-ki7-ki1-review-rating">' + starsHtml + '</div>' +
                     '<div class="cro-ki7-ki1-review-text">' +
-                        '<p class="cro-ki7-ki1-review-content-text"' + fullTextDataAttr + '>' + escapedDisplayText + ellipsis + seeMoreButtonHtml + '</p>' +
+                        '<p class="cro-ki7-ki1-review-content-text"' + fullTextDataAttr + '>' + escapedDisplayText + seeMoreButtonHtml + '</p>' +
                     '</div>' +
                     itemTypeHtml +
                     replyHtml +
@@ -4245,10 +4245,10 @@
                             // After fade-out, change content and fade back in
                             setTimeout(function() {
                                 if (isExpanded) {
-                                    // Collapse: show truncated text (250 chars + ... + button)
-                                    var truncatedText = fullText.length > 250 ? fullText.substring(0, 250) : fullText;
+                                    // Collapse: show truncated text (250 chars, no trailing space, ellipsis in link)
+                                    var truncatedText = fullText.length > 250 ? fullText.substring(0, 250).trimEnd() : fullText;
                                     var escapedTruncated = escapeHtml(truncatedText).replace(/\n/g, '<br>');
-                                    paragraph.innerHTML = escapedTruncated + (fullText.length > 250 ? '...' : '') + '<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
+                                    paragraph.innerHTML = escapedTruncated + (fullText.length > 250 ? '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>' : '');
                                     paragraph.classList.remove('cro-ki7-ki1-review-expanded');
                                 } else {
                                     // Expand: show full text + button
@@ -4292,9 +4292,10 @@
                             // After fade-out, change content and fade back in
                             setTimeout(function() {
                                 if (isExpanded) {
-                                    // Collapse: show truncated text + button
-                                    var escapedTruncated = escapeHtml(fullText.substring(0, 150)).replace(/\n/g, '<br>');
-                                    paragraph.innerHTML = escapedTruncated + '...<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
+                                    // Collapse: show truncated text (no trailing space, ellipsis in link)
+                                    var truncatedReplyText = fullText.substring(0, 150).trimEnd();
+                                    var escapedTruncated = escapeHtml(truncatedReplyText).replace(/\n/g, '<br>');
+                                    paragraph.innerHTML = escapedTruncated + '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>';
                                     paragraph.classList.remove('cro-ki7-ki1-review-reply-expanded');
                                 } else {
                                     // Expand: show full text + button
