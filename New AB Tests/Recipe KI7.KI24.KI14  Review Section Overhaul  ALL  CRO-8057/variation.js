@@ -3800,7 +3800,7 @@
                     displayReplyText = fullReplyText.substring(0, 150).trimEnd();
                     replyEllipsis = '';
                     isReplyTruncated = true;
-                    replySeeMoreButtonHtml = '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>';
+                    replySeeMoreButtonHtml = '...<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
                 }
                 
                 // Escape HTML and replace newlines for display
@@ -3826,7 +3826,7 @@
                 displayText = fullText.substring(0, 250).trimEnd();
                 ellipsis = '';
                 isTruncated = true;
-                seeMoreButtonHtml = '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>';
+                seeMoreButtonHtml = '...<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
             }
             
             // Escape HTML and replace newlines for display
@@ -4195,6 +4195,7 @@
                             '<button type="button" class="cro-ki7-ki1-reviews-write-btn">Write a review</button>' +
                         '</div>' +
                     '</div>' +
+                    '<button type="button" class="cro-ki7-ki1-reviews-write-btnMobile">Write a review</button>' +
                     '<div class="cro-ki7-ki1-reviews-inner">' +
                         reviewsCardsHtml +
                     '</div>' +
@@ -4248,7 +4249,7 @@
                                     // Collapse: show truncated text (250 chars, no trailing space, ellipsis in link)
                                     var truncatedText = fullText.length > 250 ? fullText.substring(0, 250).trimEnd() : fullText;
                                     var escapedTruncated = escapeHtml(truncatedText).replace(/\n/g, '<br>');
-                                    paragraph.innerHTML = escapedTruncated + (fullText.length > 250 ? '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>' : '');
+                                    paragraph.innerHTML = escapedTruncated + (fullText.length > 250 ? '...<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>' : '');
                                     paragraph.classList.remove('cro-ki7-ki1-review-expanded');
                                 } else {
                                     // Expand: show full text + button
@@ -4295,7 +4296,7 @@
                                     // Collapse: show truncated text (no trailing space, ellipsis in link)
                                     var truncatedReplyText = fullText.substring(0, 150).trimEnd();
                                     var escapedTruncated = escapeHtml(truncatedReplyText).replace(/\n/g, '<br>');
-                                    paragraph.innerHTML = escapedTruncated + '<a href="#" class="cro-ki7-ki1-review-see-more">...See more</a>';
+                                    paragraph.innerHTML = escapedTruncated + '...<a href="#" class="cro-ki7-ki1-review-see-more">See more</a>';
                                     paragraph.classList.remove('cro-ki7-ki1-review-reply-expanded');
                                 } else {
                                     // Expand: show full text + button
@@ -4712,6 +4713,10 @@
 
 
             live(".cro-ki7-ki1-reviews-write-btn", "click", function (e) {
+                looxWrite();
+            });
+
+            live(".cro-ki7-ki1-reviews-write-btnMobile", "click", function (e) {
                 looxWrite();
             });
         }
