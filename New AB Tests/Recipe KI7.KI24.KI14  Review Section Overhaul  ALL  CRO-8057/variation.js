@@ -3736,7 +3736,6 @@
             options = options || {};
             var dataIndex = options.dataIndex !== undefined ? ' data-review-index="' + options.dataIndex + '"' : '';
             var displayStyle = options.displayStyle || '';
-            var cardAttributes = 'class="cro-ki7-ki1-review-card"' + dataIndex + (displayStyle ? ' ' + displayStyle : '');
             
             var starCount = Math.min(5, Math.max(0, parseInt(rating, 10) || 0));
             var starsHtml = '';
@@ -3780,6 +3779,10 @@
             if (!hasImage && !hasVideo) {
                 imageContainerClass += ' cro-ki7-ki1-review-noImage';
             }
+            
+            // Card class: add cro-ki7-ki1-review-cardText when no image or video
+            var cardClass = 'cro-ki7-ki1-review-card' + (!hasImage && !hasVideo ? ' cro-ki7-ki1-review-cardText' : '');
+            var cardAttributes = 'class="' + cardClass + '"' + dataIndex + (displayStyle ? ' ' + displayStyle : '');
             
             var itemTypeHtml = '';
             if (color && color.trim() !== '') {
@@ -4104,18 +4107,16 @@
             '</div>';
         }
 
-        function generateReviewsHTML(sortOrder, ratingFilter) {
+        // Returns the same filtered and sorted review list used for rendering cards (used by modal click)
+        function getFilteredAndSortedReviews(sortOrder, ratingFilter) {
             sortOrder = sortOrder || 'featured';
             ratingFilter = ratingFilter || null;
             var reviews = getReviewsForCurrentPage();
-            
-            // Filter by rating if specified
             if (ratingFilter !== null && ratingFilter !== undefined) {
                 reviews = reviews.filter(function(review) {
                     return parseInt(review.rating, 10) === parseInt(ratingFilter, 10);
                 });
             }
-
             if (sortOrder === 'newest') {
                 reviews = reviews.slice().sort(function (a, b) {
                     var tA = (a.date && !isNaN(new Date(a.date).getTime())) ? new Date(a.date).getTime() : 0;
@@ -4135,6 +4136,13 @@
                     return rA - rB;
                 });
             }
+            return reviews;
+        }
+
+        function generateReviewsHTML(sortOrder, ratingFilter) {
+            sortOrder = sortOrder || 'featured';
+            ratingFilter = ratingFilter || null;
+            var reviews = getFilteredAndSortedReviews(sortOrder, ratingFilter);
 
             var reviewsCardsHtml = '';
             var reviewsToShow = Math.min(5, reviews.length); // Show first 5 reviews initially
@@ -4692,7 +4700,7 @@
                 }
             }
 
-            // Handle review card clicks
+            // Handle review card clicks (use same filtered/sorted list as rendered cards)
             live(".cro-ki7-ki1-review-card", "click", function (e) {
                 // Don't open modal if clicking on "See more" link or other interactive elements
                 if (e.target.closest('a.cro-ki7-ki1-review-see-more')) {
@@ -4701,13 +4709,18 @@
 
                 var reviewCard = this;
                 var reviewIndex = reviewCard.getAttribute('data-review-index');
-                
-                if (reviewIndex !== null) {
-                    var reviews = getReviewsForCurrentPage();
-                    var index = parseInt(reviewIndex, 10);
-                    if (reviews[index]) {
-                        openReviewModal(reviews[index]);
-                    }
+                if (reviewIndex === null) return;
+
+                var container = document.querySelector('.cro-ki7-ki1-reviews');
+                var sortBlock = document.querySelector('.cro-ki7-ki1-reviews-sort');
+                var currentSort = sortBlock ? (sortBlock.getAttribute('data-current-sort') || 'featured') : 'featured';
+                var ratingFilter = container ? container.getAttribute('data-rating-filter') : null;
+                if (ratingFilter === '') ratingFilter = null;
+
+                var reviews = getFilteredAndSortedReviews(currentSort, ratingFilter);
+                var index = parseInt(reviewIndex, 10);
+                if (reviews[index]) {
+                    openReviewModal(reviews[index]);
                 }
             });
 

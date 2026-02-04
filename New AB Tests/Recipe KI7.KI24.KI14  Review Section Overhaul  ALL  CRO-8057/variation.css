@@ -1324,6 +1324,7 @@ span.cro-ki7-ki1-review-verifiedImg {
 
     .cro-ki7-ki1-review-item-type{
         padding: 0 10px;
+        margin-bottom: 10px;
     }
 
     .cro-ki7-ki1-review-reply::before {
@@ -1343,5 +1344,13 @@ span.cro-ki7-ki1-review-verifiedImg {
         right: 0;
         /* min-width: 150px; */
         /* width: 200px; */
+    }
+
+    .cro-ki7-ki1-review-reply{
+        margin-top: 5px;
+    }
+
+    .cro-ki7-ki1-review-card.cro-ki7-ki1-review-cardText .cro-ki7-ki1-review-content{
+        padding-top: 10px;
     }
 }
