@@ -87,7 +87,7 @@
     /* padding: 0 16px 10px; */
     margin: 0 0 4px 0;
     /* border-bottom: 1px solid #eee; */
-    font-weight: 600;
+    font-weight: 500;
     font-size: 18px;
     margin-bottom: 20px;
 }
@@ -133,6 +133,12 @@
     font-family: Poppins, sans-serif;
     font-size: 14px;
     font-weight: 400;
+    color: var(--lexiehearing-com-mirage, var(--color-azure-17, #1E293B));
+    font-family: Poppins;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: var(--font-weight-400, 400);
+    line-height: var(--font-size-20, 20px); /* 125% */
 }
 
 .cro-ki7-ki1-reviews-sort-btn {
@@ -322,6 +328,7 @@
     font-weight: 600;
     line-height: 19px;
     margin-top: 5px;
+    margin-left: 5px;
 }
 
 .cro-ki7-ki1-review-text a.cro-ki7-ki1-review-see-more:hover {
@@ -361,9 +368,18 @@
 }
 
 .cro-ki7-ki1-review-reply {
+    position: relative;
     margin-top: 15px;
     padding-top: 10px;
-    border-top: 1px solid #eee;
+    border-top: none;
+}
+
+.cro-ki7-ki1-review-reply::before {
+    content: '';
+    position: absolute;
+    left: -22px;
+    right: 0px;
+    top: 0;
     border-top: 0.8px solid #E2E2E2;
 }
 
@@ -413,6 +429,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 19px;
+    margin-left: 5px;
 }
 
 .cro-ki7-ki1-review-reply-text a.cro-ki7-ki1-review-see-more:hover {
@@ -1223,7 +1240,9 @@ span.cro-ki7-ki1-review-verifiedImg {
     .cro-ki7-ki1-reviews-summary-title{
         font-size: 32px;
         line-height: 35.2px;
+        margin: 0 auto;
         margin-bottom: 12px;
+        max-width: 280px;
     }
 
     .cro-ki7-ki1-reviews{
@@ -1305,6 +1324,11 @@ span.cro-ki7-ki1-review-verifiedImg {
 
     .cro-ki7-ki1-review-item-type{
         padding: 0 10px;
+    }
+
+    .cro-ki7-ki1-review-reply::before {
+        left: 0;
+        right: 0;
     }
 
     .cro-ki7-ki1-review-reply-header{
